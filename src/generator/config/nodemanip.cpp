@@ -217,6 +217,7 @@ int addNodes(std::string link, std::vector<Proxy> &allNodes, int groupID, parse_
         break;
     default:
         explode(link, node);
+        node.Remark+="-"+std::to_string(groupID+1);   
         if(node.Type == ProxyType::Unknown)
         {
             writeLog(LOG_TYPE_ERROR, "No valid link found.");
