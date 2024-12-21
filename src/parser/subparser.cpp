@@ -2493,12 +2493,15 @@ void explodeSub(std::string sub, std::vector<Proxy> &nodes)
         }
         strstream << sub;
         char delimiter = count(sub.begin(), sub.end(), '\n') < 1 ? count(sub.begin(), sub.end(), '\r') < 1 ? ' ' : '\r' : '\n';
-        while(getline(strstream, strLink, delimiter))
+        int i = 0;
+        while (getline(strstream, strLink, delimiter))
         {
+            i++;
             Proxy node;
             if(strLink.rfind('\r') != std::string::npos)
                 strLink.erase(strLink.size() - 1);
             explode(strLink, node);
+            node.Remark+= "-"+std::to_string(i);
             if(strLink.empty() || node.Type == ProxyType::Unknown)
             {
                 continue;
